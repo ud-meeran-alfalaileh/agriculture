@@ -1,10 +1,13 @@
 import 'package:agriculture/src/config/app_text.dart';
 import 'package:agriculture/src/config/sizes/sizes.dart';
 import 'package:agriculture/src/config/theme/theme.dart';
+import 'package:agriculture/src/feature/admin/ads/view/pages/user_ads.dart';
+import 'package:agriculture/src/feature/farmer/post/controller/post_controller.dart';
 import 'package:agriculture/src/feature/farmer/post/view/page/add_post_page.dart';
 import 'package:agriculture/src/feature/farmer/post/view/widget/post_widget.dart';
 import 'package:agriculture/src/feature/login/model/user_model.dart';
 import 'package:agriculture/src/feature/profile/controller/profile_controller.dart';
+import 'package:agriculture/src/feature/weather/view/weather_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -17,6 +20,13 @@ class PostPage extends StatefulWidget {
 
 class _PostPageState extends State<PostPage> {
   final controller = Get.put(ProfileController());
+  final postController = Get.put(PostController());
+
+  @override
+  void dispose() {
+    postController.formkey;
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -58,10 +68,11 @@ class _PostPageState extends State<PostPage> {
                 ),
                 body: Container(
                   margin: const EdgeInsets.all(10),
+                  height: 700,
                   child: SingleChildScrollView(
                     scrollDirection: Axis.vertical,
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         SizedBox(
                           height: context.screenHeight * .02,
@@ -69,34 +80,46 @@ class _PostPageState extends State<PostPage> {
                         Row(
                           children: [
                             GestureDetector(
-                              onTap: () {
-                                controller.pickImage(userData.id);
-                              },
-                              child: userData.imageUrl != null
-                                  ? CircleAvatar(
-                                      radius: 35,
-                                      backgroundImage:
-                                          NetworkImage(userData.imageUrl!))
-                                  : Container(
+                              child: userData.imageUrl != userData.imageUrl!
+                                  ? Container(
+                                      width: 50,
+                                      height: 50,
                                       decoration: BoxDecoration(
-                                          color: AppTheme
-                                              .lightAppColors.background,
-                                          shape: BoxShape.circle),
-                                      child: Icon(Icons.person,
-                                          size: 40,
-                                          color: AppTheme
-                                              .lightAppColors.background),
+                                          borderRadius:
+                                              BorderRadius.circular(50),
+                                          image: DecorationImage(
+                                              image: NetworkImage(
+                                                  userData.imageUrl!))),
+                                    )
+                                  : Container(
+                                      width: 1,
                                     ),
                             ),
                             SizedBox(
                               width: context.screenWidth * 0.05,
                             ),
                             thirdText("Welcome ${userData.name}.."),
+                            const Spacer(),
+                            IconButton(
+                                onPressed: () {
+                                  Get.to(WeatherWidget());
+                                },
+                                icon: Icon(
+                                  Icons.sunny,
+                                  color: AppTheme.lightAppColors.primary,
+                                )),
                           ],
                         ),
                         Divider(
                           thickness: 2,
                           color: AppTheme.lightAppColors.primary,
+                        ),
+                        SizedBox(
+                          height: context.screenHeight * .02,
+                        ),
+                        AdsWidget(),
+                        SizedBox(
+                          height: context.screenHeight * .02,
                         ),
                         const PostWidget()
                       ],

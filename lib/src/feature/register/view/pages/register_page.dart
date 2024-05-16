@@ -144,7 +144,7 @@ class RegisterPage extends StatelessWidget {
                     }),
                     GestureDetector(
                       onTap: () {
-                        Get.to(const LoginPage());
+                        Get.to(() => const LoginPage());
                       },
                       child: Text.rich(TextSpan(
                           text: "Already have an account?".tr,

@@ -20,9 +20,9 @@ class _NavBarWidgetState extends State<NavBarWidget> {
   late final email = _authRepo.firebaseUser.value?.email;
 
   final List<Widget> widgetList = const [
-    AllExportPage(),
     PostPage(),
     CropsPage(),
+    AllExportPage(),
     ProfilePage(),
   ];
 

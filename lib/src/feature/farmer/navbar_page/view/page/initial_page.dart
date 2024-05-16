@@ -1,11 +1,12 @@
 import 'package:agriculture/src/config/theme/theme.dart';
-import 'package:agriculture/src/feature/navbar_page/view/start_page.dart';
-import 'package:agriculture/src/feature/profile/view/profile_page.dart';
+import 'package:agriculture/src/feature/admin/nav_bar/admin_navbar_page.dart';
+import 'package:agriculture/src/feature/exports/export_start_page.dart';
+import 'package:agriculture/src/feature/farmer/navbar_page/view/start_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import '../../../login/view/page/login_page.dart';
+import '../../../../login/view/page/login_page.dart';
 
 class UserAuthWrapper extends StatelessWidget {
   const UserAuthWrapper({super.key});
@@ -32,11 +33,11 @@ class UserAuthWrapper extends StatelessWidget {
                   String userType = userTypeSnapshot.data ?? '';
                   switch (userType) {
                     case 'Farmer':
-                      return StartWidget();
+                      return const StartWidget();
                     case 'exports':
-                      return const ProfilePage();
-                    case 'admin':
-                      return const LoginPage();
+                      return const ExportStartWidget();
+                    case 'Admin':
+                      return const AdminNavBarWidget();
                     default:
                       return const LoginPage();
                   }

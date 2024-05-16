@@ -60,7 +60,7 @@ class AddCrops extends StatelessWidget {
                                 ),
                                 CropsTypeWidget(controller: controller),
                                 SizedBox(
-                                  height: context.screenHeight * .05,
+                                  height: context.screenHeight * .03,
                                 ),
                                 FormWidget(
                                     ontap: () {
@@ -71,12 +71,13 @@ class AddCrops extends StatelessWidget {
                                         enableText: true,
                                         hintText: "Click to choose img",
                                         invisible: false,
-                                        validator: null,
+                                        validator: (text) =>
+                                            controller.validName(text),
                                         type: TextInputType.name,
                                         inputFormat: [],
                                         onTap: () {})),
                                 SizedBox(
-                                  height: context.screenHeight * .05,
+                                  height: context.screenHeight * .03,
                                 ),
                                 FormWidget(
                                     formModel: FormModel(
@@ -84,12 +85,13 @@ class AddCrops extends StatelessWidget {
                                         enableText: false,
                                         hintText: "Crop Name",
                                         invisible: false,
-                                        validator: null,
+                                        validator: (text) =>
+                                            controller.validName(text),
                                         type: TextInputType.name,
                                         inputFormat: [],
                                         onTap: null)),
                                 SizedBox(
-                                  height: context.screenHeight * .05,
+                                  height: context.screenHeight * .03,
                                 ),
                                 FormWidget(
                                     formModel: FormModel(
@@ -97,12 +99,13 @@ class AddCrops extends StatelessWidget {
                                         enableText: false,
                                         hintText: "Crop Price",
                                         invisible: false,
-                                        validator: null,
+                                        validator: (text) =>
+                                            controller.validName(text),
                                         type: TextInputType.number,
                                         inputFormat: [],
                                         onTap: null)),
                                 SizedBox(
-                                  height: context.screenHeight * .05,
+                                  height: context.screenHeight * .03,
                                 ),
                                 FormWidget(
                                     formModel: FormModel(
@@ -110,12 +113,13 @@ class AddCrops extends StatelessWidget {
                                         enableText: false,
                                         hintText: "Crop Quantity",
                                         invisible: false,
-                                        validator: null,
+                                        validator: (text) =>
+                                            controller.validName(text),
                                         type: TextInputType.number,
                                         inputFormat: [],
                                         onTap: null)),
                                 SizedBox(
-                                  height: context.screenHeight * .05,
+                                  height: context.screenHeight * .03,
                                 ),
                                 FormWidget(
                                     formModel: FormModel(
@@ -123,19 +127,27 @@ class AddCrops extends StatelessWidget {
                                         enableText: false,
                                         hintText: "Crop Location",
                                         invisible: false,
-                                        validator: null,
+                                        validator: (text) =>
+                                            controller.validName(text),
                                         type: TextInputType.name,
                                         inputFormat: [],
                                         onTap: null)),
+                                SizedBox(
+                                  height: context.screenHeight * .03,
+                                ),
                                 appButton(context, "title", () {
-                                  controller.addCrops(Crops(
+                                  if (formkey.currentState!.validate()) {
+                                    controller.addCrops(Crops(
                                       title: controller.title.text.trim(),
                                       price: controller.price.text.trim(),
                                       location: controller.location.text.trim(),
                                       quantity: controller.quantity.text.trim(),
                                       userId: userData.id!,
                                       type: controller.cropsType.value,
-                                      img: controller.img.text));
+                                      img: controller.img.text,
+                                      phone: userData.phone,
+                                    ));
+                                  }
                                 })
                               ],
                             ),

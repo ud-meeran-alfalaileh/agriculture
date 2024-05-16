@@ -1,176 +1,141 @@
 import 'package:agriculture/src/config/app_text.dart';
-import 'package:agriculture/src/config/sizes/sizes.dart';
 import 'package:agriculture/src/config/theme/theme.dart';
 import 'package:agriculture/src/feature/farmer/all_exports/controller/all_export_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class AllExportPage extends StatelessWidget {
-  const AllExportPage({super.key});
+  const AllExportPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(AllExportsController());
     return SafeArea(
-        child: Scaffold(
-      body: Container(
-        margin: const EdgeInsets.only(left: 20, right: 20, top: 20),
-        child: Column(
-          children: [
-            headerText("Exports"),
-            Divider(
-              thickness: 2,
-              color: AppTheme.lightAppColors.primary,
-            ),
-            FutureBuilder(
+      child: Scaffold(
+        body: Container(
+          margin: const EdgeInsets.only(left: 20, right: 20, top: 20),
+          child: Column(
+            children: [
+              headerText("Exports"),
+              Divider(
+                thickness: 2,
+                color: AppTheme.lightAppColors.primary,
+              ),
+              FutureBuilder(
                 future: controller.fetchAllExports(),
-                builder: (context, snapShot) {
-                  if (snapShot.connectionState == ConnectionState.done) {
-                    if (snapShot.hasData) {
-                      final post = snapShot.data!;
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.done) {
+                    if (snapshot.hasData) {
+                      final post = snapshot.data!;
 
-                      return SingleChildScrollView(
-                        scrollDirection: Axis.vertical,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Container(
-                              margin:
-                                  const EdgeInsets.symmetric(horizontal: 20),
-                              height: context.screenHeight * .79,
-                              width: context.screenWidth,
-                              child: ListView.separated(
-                                scrollDirection: Axis.vertical,
-                                itemBuilder: (context, index) {
-                                  final name = post[index]['Name'].toString();
-                                  final phone = post[index]['phone'].toString();
-                                  final String img =
-                                      post[index]['imageUrl'].toString();
+                      return Expanded(
+                        child: GridView.builder(
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2, // Number of columns
+                            crossAxisSpacing: 10, // Spacing between columns
+                            mainAxisSpacing: 10, // Spacing between rows
+                          ),
+                          itemCount: post.length,
+                          itemBuilder: (context, index) {
+                            final name = post[index]['Name'].toString();
+                            final phone = post[index]['phone'].toString();
+                            final String img =
+                                post[index]['imageUrl'].toString();
 
-                                  // final image = farm[index]['Image'];
-
-                                  return GestureDetector(
-                                    child: Container(
-                                      padding: const EdgeInsets.only(top: 10),
-                                      height: context.screenHeight * .25,
-                                      width: context.screenWidth,
-                                      decoration: BoxDecoration(
-                                        boxShadow: [
-                                          BoxShadow(
-                                            blurRadius: 10,
-                                            color: AppTheme
-                                                .lightAppColors.background,
-                                          )
-                                        ],
-                                        borderRadius: BorderRadius.circular(20),
-                                        border: Border.all(
-                                          width: 2.0,
-                                          color:
-                                              AppTheme.lightAppColors.primary,
-                                        ),
-                                      ),
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Row(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Container(
-                                                  width: 60,
-                                                  height: 60,
-                                                  decoration: BoxDecoration(
-                                                      image: DecorationImage(
-                                                          image:
-                                                              NetworkImage(img),
-                                                          fit: BoxFit.cover),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              50),
-                                                      border: Border.all(
-                                                          color: AppTheme
-                                                              .lightAppColors
-                                                              .primary)),
-                                                  child: img == ""
-                                                      ? ColorFiltered(
-                                                          colorFilter:
-                                                              ColorFilter.mode(
-                                                                  AppTheme
-                                                                      .lightAppColors
-                                                                      .primary,
-                                                                  BlendMode
-                                                                      .srcIn),
-                                                          child: Image.asset(
-                                                              "assets/images/Vector.png"),
-                                                        )
-                                                      : null,
-                                                ),
-                                                SizedBox(
-                                                  width:
-                                                      context.screenWidth * .03,
-                                                ),
-                                                Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    headerText(name),
-                                                  ],
-                                                ),
-                                                const Spacer(),
-                                                IconButton(
-                                                    onPressed: () {
-                                                      controller
-                                                          .openWhatsAppChat(
-                                                              phone);
-                                                    },
-                                                    icon: Icon(
-                                                      Icons.message,
-                                                      color: AppTheme
-                                                          .lightAppColors
-                                                          .primary,
-                                                    ))
-                                              ],
+                            return GestureDetector(
+                              onTap: () {
+                                // Add your onTap functionality
+                              },
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  border: Border.all(
+                                    width: 2.0,
+                                    color: AppTheme.lightAppColors.primary,
+                                  ),
+                                ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Stack(
+                                      children: [
+                                        Container(
+                                          width: double.infinity,
+                                          height: 120, // Adjust as needed
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                const BorderRadius.only(
+                                                    topLeft:
+                                                        Radius.circular(20),
+                                                    topRight:
+                                                        Radius.circular(20)),
+                                            image: DecorationImage(
+                                              image: NetworkImage(img),
+                                              fit: BoxFit.cover,
                                             ),
-                                            Divider(
-                                              color: AppTheme
-                                                  .lightAppColors.primary,
-                                            ),
-                                          ],
+                                          ),
                                         ),
-                                      ),
+                                        Positioned(
+                                          top: 5,
+                                          right: 4,
+                                          child: Container(
+                                            height: 40, // Adjust as needed
+                                            decoration: BoxDecoration(
+                                                shape: BoxShape.circle,
+                                                color: AppTheme
+                                                    .lightAppColors.background),
+                                            child: IconButton(
+                                              onPressed: () {
+                                                controller
+                                                    .openWhatsAppChat(phone);
+                                              },
+                                              icon: Icon(
+                                                Icons.message,
+                                                color: AppTheme
+                                                    .lightAppColors.primary,
+                                              ),
+                                            ),
+                                          ),
+                                        )
+                                      ],
                                     ),
-                                  );
-                                },
-                                itemCount: post.length,
-                                separatorBuilder:
-                                    (BuildContext context, int index) {
-                                  return const SizedBox(
-                                    height: 10,
-                                  );
-                                },
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 5),
+                                      child: Text(
+                                        name,
+                                        style: GoogleFonts.poppins(
+                                            textStyle: const TextStyle(
+                                          fontSize: 17,
+                                          fontWeight: FontWeight.w400,
+                                        )),
+                                      ),
+                                    )
+                                  ],
+                                ),
                               ),
-                            ),
-                          ],
+                            );
+                          },
                         ),
                       );
-                    } else if (snapShot.hasError) {
-                      return Center(child: Text('Error${snapShot.error}'));
+                    } else if (snapshot.hasError) {
+                      return Center(child: Text('Error ${snapshot.error}'));
                     } else {
-                      return const Center(child: CircularProgressIndicator());
+                      return Center(child: CircularProgressIndicator());
                     }
-                  } else if (snapShot.connectionState ==
+                  } else if (snapshot.connectionState ==
                       ConnectionState.waiting) {
-                    return const Center(child: CircularProgressIndicator());
+                    return Center(child: CircularProgressIndicator());
                   } else {
-                    return const Center(child: CircularProgressIndicator());
+                    return Center(child: CircularProgressIndicator());
                   }
-                })
-          ],
+                },
+              ),
+            ],
+          ),
         ),
       ),
-    ));
+    );
   }
 }

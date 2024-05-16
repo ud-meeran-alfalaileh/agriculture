@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:agriculture/src/config/theme/theme.dart';
 import 'package:agriculture/src/feature/farmer/crops/model/crops_model.dart';
-import 'package:agriculture/src/feature/navbar_page/view/page/navbar_page.dart';
+import 'package:agriculture/src/feature/farmer/navbar_page/view/page/navbar_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +22,13 @@ class CropsController extends GetxController {
 
   setValue(value) {
     cropsType.value = value;
+  }
+
+  validName(String? name) {
+    if (name!.isEmpty) {
+      return "Field is not valid";
+    }
+    return null;
   }
 
   Future<List<Map<String, dynamic>>> fetchAllCrops(String userId) async {
@@ -121,11 +128,12 @@ class CropsController extends GetxController {
     }
 
     Reference storageReference =
-        FirebaseStorage.instance.ref().child('images').child('filename.jpg');
+        FirebaseStorage.instance.ref().child('images').child('$file.jpg');
     await storageReference.putFile(File(file.path));
 
     String imageUrl = await storageReference.getDownloadURL();
     setImage(File(file.path));
+
     img.text = imageUrl;
   }
 }

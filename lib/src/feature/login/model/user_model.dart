@@ -38,6 +38,6 @@ class UserModel {
         email: data['Email'],
         imageUrl: data["imageUrl"] ?? "",
         userType: data["UserType"],
-        phone: data["phone"]);
+        phone: data["phone"] ?? "");
   }
 }

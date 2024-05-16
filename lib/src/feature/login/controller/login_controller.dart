@@ -1,6 +1,4 @@
-import 'package:agriculture/src/feature/navbar_page/view/page/navbar_page.dart';
-import 'package:agriculture/src/feature/profile/view/profile_page.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:agriculture/src/feature/farmer/navbar_page/view/page/initial_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -36,23 +34,12 @@ class LoginController extends GetxController {
 
   Future onLogin() async {
     try {
-      UserCredential userCredential = await _auth.signInWithEmailAndPassword(
+      await _auth.signInWithEmailAndPassword(
         email: email.text,
         password: password.text,
       );
 
-      String userType = await _getUserType(userCredential.user!.email!);
-
-      if (userType == 'Farmer') {
-        Get.to(const NavBarWidget());
-      } else if (userType == 'exports') {
-        Get.to(const ProfilePage());
-      } else {
-        Get.snackbar("ERROR", "Email or Password is invild",
-            snackPosition: SnackPosition.BOTTOM,
-            colorText: Colors.white,
-            backgroundColor: Colors.red);
-      }
+      Get.to(const UserAuthWrapper());
     } on FirebaseAuthException {
       print(FirebaseAuthException);
       Get.snackbar("ERROR", "Email or Password is invild",
@@ -62,16 +49,16 @@ class LoginController extends GetxController {
     }
   }
 
-  Future<String> _getUserType(String email) async {
-    QuerySnapshot userQuery = await FirebaseFirestore.instance
-        .collection('Users')
-        .where('Email', isEqualTo: email)
-        .get();
+  // Future<String> _getUserType(String email) async {
+  //   QuerySnapshot userQuery = await FirebaseFirestore.instance
+  //       .collection('Users')
+  //       .where('Email', isEqualTo: email)
+  //       .get();
 
-    if (userQuery.docs.isNotEmpty) {
-      return userQuery.docs.first['UserType'];
-    }
+  //   if (userQuery.docs.isNotEmpty) {
+  //     return userQuery.docs.first['UserType'];
+  //   }
 
-    return '';
-  }
+  //   return '';
+  // }
 }

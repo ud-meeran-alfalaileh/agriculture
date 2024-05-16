@@ -19,8 +19,10 @@ class ProfileController extends GetxController {
   @override
   void onReady() async {
     super.onReady();
-    _authRepo.firebaseUser = Rx<User?>(FirebaseAuth.instance.currentUser);
-    _authRepo.firebaseUser.bindStream(FirebaseAuth.instance.userChanges());
+    if (_authRepo.firebaseUser.value == null) {
+      _authRepo.firebaseUser = Rx<User?>(FirebaseAuth.instance.currentUser);
+      _authRepo.firebaseUser.bindStream(FirebaseAuth.instance.userChanges());
+    }
   }
 
   void setImage(File? newImage) {
@@ -34,7 +36,7 @@ class ProfileController extends GetxController {
     }
 
     Reference storageReference =
-        FirebaseStorage.instance.ref().child('images').child('filename.jpg');
+        FirebaseStorage.instance.ref().child('images').child('$userId.jpg');
     await storageReference.putFile(File(file.path));
 
     String imageUrl = await storageReference.getDownloadURL();
@@ -63,11 +65,15 @@ class ProfileController extends GetxController {
 
 // user Details
   getUserDataForFarmer() {
-    final email = _authRepo.firebaseUser.value?.email;
-    if (email != null) {
-      return _userRepo.getUserDetails(email);
+    if (_authRepo.firebaseUser.value != null) {
+      final email = _authRepo.firebaseUser.value!.email;
+      if (email != null) {
+        return _userRepo.getUserDetails(email);
+      } else {
+        Get.snackbar("Error", "Email is null");
+      }
     } else {
-      Get.snackbar("Error", "Login to get email");
+      Get.snackbar("Error", "Firebase user is null");
     }
   }
 }

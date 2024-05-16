@@ -1,14 +1,19 @@
 import 'package:agriculture/src/config/theme/theme.dart';
+import 'package:agriculture/src/feature/admin/nav_bar/admin_navbar_page.dart';
+import 'package:agriculture/src/feature/exports/navbar/view/exports_navbar_page.dart';
+import 'package:agriculture/src/feature/farmer/navbar_page/view/page/navbar_page.dart';
 import 'package:agriculture/src/feature/farmer/post/model/post_model.dart';
-import 'package:agriculture/src/feature/navbar_page/view/page/navbar_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class PostController extends GetxController {
   final _db = FirebaseFirestore.instance;
+  RxInt postLength = 0.obs;
+  RxInt userPostLength = 0.obs;
 
   final description = TextEditingController();
+  final formkey = GlobalKey<FormState>();
 
   Future<List<Map<String, dynamic>>> fetchAllPost() async {
     List<Map<String, dynamic>> post = [];
@@ -52,7 +57,13 @@ class PostController extends GetxController {
           backgroundColor: Colors.red);
       throw error;
     });
-    Get.to(const NavBarWidget());
+    if (post.type == "User") {
+      Get.to(const NavBarWidget());
+    } else if (post.type == "exports") {
+      Get.to(const ExportsNavBarWidget());
+    } else if (post.type == "Admin") {
+      Get.to(const AdminNavBarWidget());
+    }
   }
 
   Future<Iterable<PostModel>> fetchUserPosts(String email) async {

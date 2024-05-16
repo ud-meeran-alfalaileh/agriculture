@@ -56,7 +56,7 @@ class ProfilePage extends StatelessWidget {
                                       onTap: () async {
                                         await auth.signOut();
 
-                                        Get.offAll(const LoginPage());
+                                        Get.offAll(() => const LoginPage());
                                       },
                                       child: Icon(
                                         Icons.logout,
@@ -100,10 +100,34 @@ class ProfilePage extends StatelessWidget {
                               ),
                               headerText("Email: ${userData.email}"),
                               SizedBox(
-                                height: context.screenHeight * .01,
+                                height: context.screenHeight * .3,
                               ),
-                              headerText("My Posts:"),
-                              UserPosts(email: userData.email)
+                              Center(
+                                child: GestureDetector(
+                                  onTap: () {
+                                    Get.to(UserPosts(email: userData.email));
+                                  },
+                                  child: Container(
+                                    width: context.screenWidth * .5,
+                                    height: context.screenHeight * .07,
+                                    decoration: BoxDecoration(
+                                        color: AppTheme.lightAppColors.primary,
+                                        borderRadius:
+                                            BorderRadius.circular(10)),
+                                    child: Center(
+                                      child: Text(
+                                        "My Posts",
+                                        style: GoogleFonts.poppins(
+                                            textStyle: TextStyle(
+                                                fontSize: 20,
+                                                color: AppTheme
+                                                    .lightAppColors.background,
+                                                fontWeight: FontWeight.w500)),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
                             ],
                           ),
                         ),

@@ -8,6 +8,7 @@ class Crops {
   String quantity;
   String location;
   String userId;
+  String phone;
   Crops({
     required this.title,
     required this.price,
@@ -16,6 +17,7 @@ class Crops {
     required this.location,
     required this.quantity,
     required this.userId,
+    required this.phone,
   });
 
   toJason() {
@@ -23,6 +25,7 @@ class Crops {
       "title": title,
       "price": price,
       "img": img,
+      "phone": phone,
       "location": location,
       "quantity": quantity,
       "userId": userId,

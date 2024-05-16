@@ -22,6 +22,8 @@ class PostWidget extends StatelessWidget {
           return Container();
         } else {
           final post = snapshot.data!;
+          controller.postLength.value = post.length;
+
           return SingleChildScrollView(
             scrollDirection: Axis.vertical,
             child: Column(
@@ -29,10 +31,11 @@ class PostWidget extends StatelessWidget {
               children: [
                 Container(
                   margin: const EdgeInsets.symmetric(horizontal: 20),
-                  height: context.screenHeight * .75,
+                  height:
+                      (context.screenHeight * .5) * controller.postLength.value,
                   width: context.screenWidth,
                   child: ListView.separated(
-                    scrollDirection: Axis.vertical,
+                    physics: const NeverScrollableScrollPhysics(),
                     itemBuilder: (context, index) {
                       final name = post[index]['Name'].toString();
                       final String img = post[index]['img'].toString();
@@ -42,6 +45,37 @@ class PostWidget extends StatelessWidget {
                       // final image = farm[index]['Image'];
 
                       return GestureDetector(
+                        onTap: () {
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return Dialog(
+                                clipBehavior: Clip.hardEdge,
+                                backgroundColor:
+                                    AppTheme.lightAppColors.background,
+                                child: Container(
+                                  padding: const EdgeInsets.all(15),
+                                  width: context.screenWidth,
+                                  height: context.screenHeight * .85,
+                                  child: SingleChildScrollView(
+                                    child: Column(
+                                      children: [
+                                        Text(
+                                          description,
+                                          style: GoogleFonts.poppins(
+                                              textStyle: TextStyle(
+                                                  fontSize: 18,
+                                                  color: AppTheme.lightAppColors
+                                                      .mainTextcolor)),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              );
+                            },
+                          );
+                        },
                         child: Container(
                           padding: const EdgeInsets.only(top: 10),
                           height: context.screenHeight * .45,
@@ -62,7 +96,6 @@ class PostWidget extends StatelessWidget {
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Row(
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -136,7 +169,7 @@ class PostWidget extends StatelessWidget {
     );
   }
 
-  String discriptionShortenText(String text, {int maxLength = 250}) {
+  String discriptionShortenText(String text, {int maxLength = 220}) {
     if (text.length <= maxLength) {
       return text;
     } else {

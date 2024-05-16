@@ -9,14 +9,26 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  final formkey = GlobalKey<FormState>();
+
+  // @override
+  // void dispose() {
+  //   formkey.currentState?.dispose();
+  //   super.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(LoginController());
     final userRepo = Get.put(UserRepository());
-    final formkey = GlobalKey<FormState>();
 
     return SafeArea(
         child: Scaffold(
