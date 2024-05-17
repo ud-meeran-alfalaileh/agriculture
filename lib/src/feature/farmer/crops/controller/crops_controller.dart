@@ -126,9 +126,11 @@ class CropsController extends GetxController {
     if (file == null) {
       return;
     }
+    String uniqueName =
+        '${DateTime.now().millisecondsSinceEpoch}_${UniqueKey()}';
 
     Reference storageReference =
-        FirebaseStorage.instance.ref().child('images').child('$file.jpg');
+        FirebaseStorage.instance.ref().child('images').child('$uniqueName.jpg');
     await storageReference.putFile(File(file.path));
 
     String imageUrl = await storageReference.getDownloadURL();

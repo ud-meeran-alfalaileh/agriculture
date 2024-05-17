@@ -32,6 +32,7 @@ class LoginController extends GetxController {
     }
   }
 
+//login function
   Future onLogin() async {
     try {
       await _auth.signInWithEmailAndPassword(

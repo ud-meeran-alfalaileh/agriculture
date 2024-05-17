@@ -26,7 +26,7 @@ class ExportCropspage extends StatelessWidget {
             if (item.isEmpty) {
               return Center(
                 child: Text(
-                  "Add New Product",
+                  "No Product",
                   textAlign: TextAlign.center,
                   style: GoogleFonts.poppins(
                       textStyle: TextStyle(
@@ -64,10 +64,8 @@ class ExportCropspage extends StatelessWidget {
 
                             final quantity = item[index]['quantity'].toString();
                             final price = item[index]['price'].toString();
-                            // final image = farm[index]['Image'];
 
-                            return GestureDetector(
-                                child: Container(
+                            return Container(
                               margin: const EdgeInsets.symmetric(horizontal: 5),
                               padding: const EdgeInsets.only(right: 10),
                               width: context.screenWidth,
@@ -98,9 +96,7 @@ class ExportCropspage extends StatelessWidget {
                                               left: Radius.circular(20)),
                                       image: DecorationImage(
                                           image: NetworkImage(img),
-                                          alignment: Alignment
-                                              .topCenter, // Adjust alignment here
-
+                                          alignment: Alignment.topCenter,
                                           fit: BoxFit.cover),
                                     ),
                                   ),
@@ -157,7 +153,7 @@ class ExportCropspage extends StatelessWidget {
                                   )
                                 ],
                               ),
-                            ));
+                            );
                           },
                           shrinkWrap: true,
                           itemCount: item.length,

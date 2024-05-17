@@ -52,6 +52,7 @@ class RegisterController extends GetxController {
     return null;
   }
 
+//if the email is taken
   Future<bool> isUsernameTaken(String username) async {
     try {
       FirebaseFirestore firestore = FirebaseFirestore.instance;

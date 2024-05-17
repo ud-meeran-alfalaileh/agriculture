@@ -10,14 +10,6 @@ class AllExportsController extends GetxController {
     }
   }
 
-  Future<void> launchPhoneCall(String phoneNumber) async {
-    final url = Uri.parse('tel:$phoneNumber');
-
-    if (!await launchUrl(url)) {
-      throw Exception('Could not launch $url');
-    }
-  }
-
   Future<List<Map<String, dynamic>>> fetchAllExports() async {
     List<Map<String, dynamic>> exports = [];
 

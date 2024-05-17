@@ -42,8 +42,6 @@ class PostWidget extends StatelessWidget {
                       final description = post[index]['Description'].toString();
                       final type = post[index]['type'].toString();
 
-                      // final image = farm[index]['Image'];
-
                       return GestureDetector(
                         onTap: () {
                           showDialog(

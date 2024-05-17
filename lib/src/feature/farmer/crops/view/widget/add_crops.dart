@@ -135,7 +135,7 @@ class AddCrops extends StatelessWidget {
                                 SizedBox(
                                   height: context.screenHeight * .03,
                                 ),
-                                appButton(context, "title", () {
+                                appButton(context, "add", () {
                                   if (formkey.currentState!.validate()) {
                                     controller.addCrops(Crops(
                                       title: controller.title.text.trim(),

@@ -49,10 +49,8 @@ class FruitPage extends StatelessWidget {
                         final img = item[index]['img'].toString();
                         final quantity = item[index]['quantity'].toString();
                         final price = item[index]['price'].toString();
-                        // final image = farm[index]['Image'];
 
-                        return GestureDetector(
-                            child: Container(
+                        return Container(
                           margin: const EdgeInsets.symmetric(horizontal: 5),
                           width: context.screenWidth * .5,
                           height: context.screenHeight * .25,
@@ -131,7 +129,7 @@ class FruitPage extends StatelessWidget {
                               )
                             ],
                           ),
-                        ));
+                        );
                       },
                       itemCount: item.length,
                       separatorBuilder: (BuildContext context, int index) {
