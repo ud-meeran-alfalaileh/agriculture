@@ -19,12 +19,6 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final formkey = GlobalKey<FormState>();
 
-  // @override
-  // void dispose() {
-  //   formkey.currentState?.dispose();
-  //   super.dispose();
-  // }
-
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(LoginController());
@@ -96,6 +90,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   appButton(context, "LOGIN", () {
                     if (formkey.currentState!.validate()) {
+                      /////login button
                       controller.onLogin();
                       userRepo.getUserDetails(controller.email.text.trim());
                       //  UserController.instance.logIn();

@@ -18,7 +18,6 @@ class RegisterPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.put(RegisterController());
     final userRepo = Get.put(UserRepository());
-    final formkey = GlobalKey<FormState>();
 
     return SafeArea(
         child: Scaffold(
@@ -47,14 +46,16 @@ class RegisterPage extends StatelessWidget {
                 color: AppTheme.lightAppColors.background,
                 borderRadius: BorderRadius.circular(20)),
             child: Form(
-              key: formkey,
+              key: controller.formkey,
               child: SingleChildScrollView(
                 child: Column(
                   children: [
                     Text("CREATE NEW ACCOUNT",
                         style: GoogleFonts.poppins(
                             textStyle: const TextStyle(
-                                fontWeight: FontWeight.w600, fontSize: 25))),
+                                color: Colors.black,
+                                fontWeight: FontWeight.w600,
+                                fontSize: 25))),
                     SizedBox(
                       height: context.screenHeight * .08,
                     ),
@@ -130,7 +131,7 @@ class RegisterPage extends StatelessWidget {
                       height: context.screenHeight * .06,
                     ),
                     appButton(context, "REGISTER", () {
-                      if (formkey.currentState!.validate()) {
+                      if (controller.formkey.currentState!.validate()) {
                         controller.onSignup(UserModel(
                             name: controller.name.text.trim(),
                             email: controller.email.text.trim(),

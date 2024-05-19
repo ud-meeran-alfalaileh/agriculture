@@ -1,7 +1,7 @@
 import 'package:agriculture/src/config/theme/theme.dart';
 import 'package:agriculture/src/core/auth_repo/auth_repo.dart';
 import 'package:agriculture/src/feature/farmer/all_exports/view/page/all_exports_page.dart';
-import 'package:agriculture/src/feature/farmer/crops/view/pages/crops_widget.dart';
+import 'package:agriculture/src/feature/farmer/crops/view/pages/crops_page.dart';
 import 'package:agriculture/src/feature/farmer/post/view/page/post_page.dart';
 import 'package:agriculture/src/feature/profile/view/profile_page.dart';
 import 'package:flutter/cupertino.dart';

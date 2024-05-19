@@ -23,12 +23,6 @@ class _PostPageState extends State<PostPage> {
   final postController = Get.put(PostController());
 
   @override
-  void dispose() {
-    postController.formkey;
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return FutureBuilder(
         future: controller.getUserDataForFarmer(),

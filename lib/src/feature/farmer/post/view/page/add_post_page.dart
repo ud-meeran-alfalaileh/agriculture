@@ -16,9 +16,9 @@ import 'package:get/get.dart';
 class AddPostPAge extends StatelessWidget {
   const AddPostPAge({super.key, required this.user});
   final UserModel user;
+
   @override
   Widget build(BuildContext context) {
-    final formkey = GlobalKey<FormState>();
     final controller = Get.put(PostController());
     return SafeArea(
         child: Scaffold(
@@ -66,7 +66,7 @@ class AddPostPAge extends StatelessWidget {
                       color: AppTheme.lightAppColors.background,
                       borderRadius: BorderRadius.circular(20)),
                   child: Form(
-                    key: formkey,
+                    key: controller.formkey,
                     child: Column(
                       children: [
                         headerText("Write Your Post"),
@@ -88,7 +88,7 @@ class AddPostPAge extends StatelessWidget {
                           height: context.screenHeight * .05,
                         ),
                         appButton(context, "POST", () {
-                          if (formkey.currentState!.validate()) {
+                          if (controller.formkey.currentState!.validate()) {
                             controller.addPost(PostModel(
                                 name: user.name,
                                 userId: user.id!,

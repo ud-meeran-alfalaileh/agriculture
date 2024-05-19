@@ -8,6 +8,7 @@ class LoginController extends GetxController {
   final password = TextEditingController();
 
   final _auth = FirebaseAuth.instance;
+
   emailValid(String email) {
     if (GetUtils.isEmail(email)) {
       return null;
@@ -49,17 +50,4 @@ class LoginController extends GetxController {
           backgroundColor: Colors.red);
     }
   }
-
-  // Future<String> _getUserType(String email) async {
-  //   QuerySnapshot userQuery = await FirebaseFirestore.instance
-  //       .collection('Users')
-  //       .where('Email', isEqualTo: email)
-  //       .get();
-
-  //   if (userQuery.docs.isNotEmpty) {
-  //     return userQuery.docs.first['UserType'];
-  //   }
-
-  //   return '';
-  // }
 }

@@ -15,7 +15,6 @@ class RegisterWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.put(RegisterController());
     final userRepo = Get.put(UserRepository());
-    final formkey = GlobalKey<FormState>();
 
     return SafeArea(
         child: Scaffold(
@@ -43,87 +42,86 @@ class RegisterWidget extends StatelessWidget {
             decoration: BoxDecoration(
                 color: AppTheme.lightAppColors.background,
                 borderRadius: BorderRadius.circular(20)),
-            child: Form(
-              key: formkey,
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    Text("CREATE NEW ACCOUNT",
-                        style: GoogleFonts.poppins(
-                            textStyle: const TextStyle(
-                                fontWeight: FontWeight.w600, fontSize: 25))),
-                    SizedBox(
-                      height: context.screenHeight * .08,
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        Get.to(RegisterPage(type: "exports"));
-                      },
-                      child: Container(
-                        width: context.screenWidth,
-                        height: context.screenHeight * .25,
-                        decoration: BoxDecoration(
-                            border: Border.all(
-                              color: AppTheme.lightAppColors.primary,
-                            ),
-                            borderRadius: BorderRadius.circular(20)),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Icon(
-                              CupertinoIcons.building_2_fill,
-                              color: AppTheme.lightAppColors.primary,
-                              size: 150,
-                            ),
-                            Text(
-                              "Exports",
-                              style: GoogleFonts.poppins(
-                                  textStyle: TextStyle(
-                                      color: AppTheme.lightAppColors.primary,
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w600)),
-                            )
-                          ],
-                        ),
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Text("CREATE NEW ACCOUNT",
+                      style: GoogleFonts.poppins(
+                          textStyle: const TextStyle(
+                              fontWeight: FontWeight.w600, fontSize: 25))),
+                  SizedBox(
+                    height: context.screenHeight * .08,
+                  ),
+                  //export
+                  GestureDetector(
+                    onTap: () {
+                      Get.to(RegisterPage(type: "exports"));
+                    },
+                    child: Container(
+                      width: context.screenWidth,
+                      height: context.screenHeight * .25,
+                      decoration: BoxDecoration(
+                          border: Border.all(
+                            color: AppTheme.lightAppColors.primary,
+                          ),
+                          borderRadius: BorderRadius.circular(20)),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Icon(
+                            CupertinoIcons.building_2_fill,
+                            color: AppTheme.lightAppColors.primary,
+                            size: 150,
+                          ),
+                          Text(
+                            "Exports",
+                            style: GoogleFonts.poppins(
+                                textStyle: TextStyle(
+                                    color: AppTheme.lightAppColors.primary,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w600)),
+                          )
+                        ],
                       ),
                     ),
-                    SizedBox(
-                      height: context.screenHeight * .055,
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        Get.to(RegisterPage(type: "Farmer"));
-                      },
-                      child: Container(
-                        width: context.screenWidth,
-                        height: context.screenHeight * .25,
-                        decoration: BoxDecoration(
-                            border: Border.all(
-                              color: AppTheme.lightAppColors.primary,
-                            ),
-                            borderRadius: BorderRadius.circular(20)),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Icon(
-                              CupertinoIcons.person,
-                              color: AppTheme.lightAppColors.primary,
-                              size: 150,
-                            ),
-                            Text(
-                              "Farmer",
-                              style: GoogleFonts.poppins(
-                                  textStyle: TextStyle(
-                                      color: AppTheme.lightAppColors.primary,
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w600)),
-                            )
-                          ],
-                        ),
+                  ),
+                  SizedBox(
+                    height: context.screenHeight * .055,
+                  ),
+                  //frmer
+                  GestureDetector(
+                    onTap: () {
+                      Get.to(RegisterPage(type: "Farmer"));
+                    },
+                    child: Container(
+                      width: context.screenWidth,
+                      height: context.screenHeight * .25,
+                      decoration: BoxDecoration(
+                          border: Border.all(
+                            color: AppTheme.lightAppColors.primary,
+                          ),
+                          borderRadius: BorderRadius.circular(20)),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Icon(
+                            CupertinoIcons.person,
+                            color: AppTheme.lightAppColors.primary,
+                            size: 150,
+                          ),
+                          Text(
+                            "Farmer",
+                            style: GoogleFonts.poppins(
+                                textStyle: TextStyle(
+                                    color: AppTheme.lightAppColors.primary,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w600)),
+                          )
+                        ],
                       ),
-                    )
-                  ],
-                ),
+                    ),
+                  )
+                ],
               ),
             ),
           ),

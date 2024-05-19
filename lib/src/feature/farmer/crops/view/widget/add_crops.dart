@@ -62,6 +62,8 @@ class AddCrops extends StatelessWidget {
                                 SizedBox(
                                   height: context.screenHeight * .03,
                                 ),
+
+                                ///imagePicker
                                 FormWidget(
                                     ontap: () {
                                       controller.pickImage();
@@ -179,74 +181,77 @@ class CropsTypeWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Obx(
-          () => GestureDetector(
-            onTap: () {
-              controller.isSelected.value = true;
-              controller.setValue("Fruits");
-              print(controller.cropsType.value);
-            },
-            child: Container(
-              width: context.screenWidth * .41,
-              height: context.screenHeight * .08,
-              decoration: BoxDecoration(
-                  color: controller.cropsType.value == "Fruits"
-                      ? AppTheme.lightAppColors.primary
-                      : AppTheme.lightAppColors.background,
-                  borderRadius: BorderRadius.circular(20),
-                  border: Border.all(color: AppTheme.lightAppColors.primary)),
-              child: Center(
-                child: Text(
-                  "Fruits",
-                  style: GoogleFonts.poppins(
-                      textStyle: TextStyle(
-                          color: controller.cropsType.value == "Fruits"
-                              ? AppTheme.lightAppColors.background
-                              : AppTheme.lightAppColors.primary,
-                          fontWeight: FontWeight.w500,
-                          fontSize: 20)),
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Obx(
+            () => GestureDetector(
+              onTap: () {
+                controller.isSelected.value = true;
+                controller.setValue("Fruits");
+                print(controller.cropsType.value);
+              },
+              child: Container(
+                width: context.screenWidth * .41,
+                height: context.screenHeight * .08,
+                decoration: BoxDecoration(
+                    color: controller.cropsType.value == "Fruits"
+                        ? AppTheme.lightAppColors.primary
+                        : AppTheme.lightAppColors.background,
+                    borderRadius: BorderRadius.circular(20),
+                    border: Border.all(color: AppTheme.lightAppColors.primary)),
+                child: Center(
+                  child: Text(
+                    "Fruits",
+                    style: GoogleFonts.poppins(
+                        textStyle: TextStyle(
+                            color: controller.cropsType.value == "Fruits"
+                                ? AppTheme.lightAppColors.background
+                                : AppTheme.lightAppColors.primary,
+                            fontWeight: FontWeight.w500,
+                            fontSize: 20)),
+                  ),
                 ),
               ),
             ),
           ),
-        ),
-        SizedBox(
-          width: context.screenWidth * .05,
-        ),
-        Obx(
-          () => GestureDetector(
-            onTap: () {
-              controller.isSelected.value = true;
-              controller.setValue("Vegetables");
-            },
-            child: Container(
-              width: context.screenWidth * .41,
-              height: context.screenHeight * .08,
-              decoration: BoxDecoration(
-                  color: controller.cropsType.value == "Vegetables"
-                      ? AppTheme.lightAppColors.primary
-                      : AppTheme.lightAppColors.background,
-                  borderRadius: BorderRadius.circular(20),
-                  border: Border.all(color: AppTheme.lightAppColors.primary)),
-              child: Center(
-                child: Text(
-                  "Vegetables",
-                  style: GoogleFonts.poppins(
-                      textStyle: TextStyle(
-                          color: controller.cropsType.value == "Vegetables"
-                              ? AppTheme.lightAppColors.background
-                              : AppTheme.lightAppColors.primary,
-                          fontWeight: FontWeight.w500,
-                          fontSize: 20)),
+          SizedBox(
+            width: context.screenWidth * .05,
+          ),
+          Obx(
+            () => GestureDetector(
+              onTap: () {
+                controller.isSelected.value = true;
+                controller.setValue("Vegetables");
+              },
+              child: Container(
+                width: context.screenWidth * .41,
+                height: context.screenHeight * .08,
+                decoration: BoxDecoration(
+                    color: controller.cropsType.value == "Vegetables"
+                        ? AppTheme.lightAppColors.primary
+                        : AppTheme.lightAppColors.background,
+                    borderRadius: BorderRadius.circular(20),
+                    border: Border.all(color: AppTheme.lightAppColors.primary)),
+                child: Center(
+                  child: Text(
+                    "Vegetables",
+                    style: GoogleFonts.poppins(
+                        textStyle: TextStyle(
+                            color: controller.cropsType.value == "Vegetables"
+                                ? AppTheme.lightAppColors.background
+                                : AppTheme.lightAppColors.primary,
+                            fontWeight: FontWeight.w500,
+                            fontSize: 20)),
+                  ),
                 ),
               ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

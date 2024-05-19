@@ -12,6 +12,7 @@ class RegisterController extends GetxController {
   final phone = TextEditingController();
   final name = TextEditingController();
   final _db = FirebaseFirestore.instance;
+  final formkey = GlobalKey<FormState>();
 
   final confirmPassword = TextEditingController();
 
@@ -36,18 +37,18 @@ class RegisterController extends GetxController {
     return null;
   }
 
-  validName(String? address) {
-    if (address!.isEmpty) {
-      return "Username is not valid";
-    }
-    return null;
-  }
-
   vaildateConfirmPassword(String? value) {
     if (value!.isEmpty) {
       return 'Confirm Password is required';
     } else if (value != password.text) {
-      return 'Passwords do not match';
+      return 'Passwords  not match';
+    }
+    return null;
+  }
+
+  validName(String? address) {
+    if (address!.isEmpty) {
+      return "Username is not valid";
     }
     return null;
   }

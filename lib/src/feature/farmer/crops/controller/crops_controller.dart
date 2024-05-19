@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:agriculture/src/config/theme/theme.dart';
 import 'package:agriculture/src/feature/farmer/crops/model/crops_model.dart';
-import 'package:agriculture/src/feature/farmer/navbar_page/view/page/navbar_page.dart';
+import 'package:agriculture/src/feature/farmer/navbar_page/view/page/initial_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -114,7 +114,7 @@ class CropsController extends GetxController {
           backgroundColor: Colors.red);
       throw error;
     });
-    Get.to(const NavBarWidget());
+    Get.to(UserAuthWrapper());
   }
 
   void setImage(File? newImage) {

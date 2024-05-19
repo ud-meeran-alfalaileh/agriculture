@@ -30,7 +30,9 @@ class _FormWidgetState extends State<FormWidget> {
           ),
           child: TextFormField(
               onTap: widget.ontap,
-              cursorColor: AppTheme.lightAppColors.primary,
+
+              ///color change
+              cursorColor: AppTheme.lightAppColors.bordercolor,
               style: TextStyle(color: AppTheme.lightAppColors.primary),
               readOnly: widget.formModel.enableText,
               inputFormatters: widget.formModel.inputFormat,
